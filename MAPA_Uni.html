@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="MAPA_Uni.css">
+    <title>Mapa Unicesumar</title>
+</head>
+<body>
+    
+    <div class="bg-img"></div>
+
+    <main>
+        <h1>Tabela do Churras</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Homens:</td>
+                    <td>
+                        <input type="number" name="numHomens" id="numHomens">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mulheres:</td>
+                    <td>
+                        <input type="number" name="numMulheres" id="numMulheres">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Crianças:</td>
+                    <td>
+                        <input type="number" name="numCriancas" id="numCriancas">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" id="Calcular" onclick="calcularItens()">Calcular</button>
+        
+        <div id="resultados"></div>
+    </main>
+
+    <script>
+        function calcularItens() {
+            const numHomens = parseInt(document.getElementById('numHomens').value) || 0;
+            const numMulheres = parseInt(document.getElementById('numMulheres').value) || 0;
+            const numCriancas = parseInt(document.getElementById('numCriancas').value) || 0;
+
+            if (numHomens < 0 || numMulheres < 0 || numCriancas < 0) {
+                alert('Por favor, insira um número válido de pessoas.');
+                return;
+            }
+
+            const carnePorHomem = 0.5; // kg
+            const carnePorMulher = 0.3; // kg
+            const carnePorCrianca = 0.2; // kg
+            const linguicaPorHomem = 0.2; // kg
+            const linguicaPorMulher = 0.15; // kg
+            const linguicaPorCrianca = 0.1; // kg
+            const frangoPorHomem = 0.15; // kg
+            const frangoPorMulher = 0.1; // kg
+            const frangoPorCrianca = 0.05; // kg
+            const refriPorHomem = 0.5; // litro
+            const refriPorMulher = 0.5; // litro
+            const refriPorCrianca = 0.3; // litro
+            const cervejaPorHomem = 1; // litro
+            const cervejaPorMulher = 0.5; // litro
+
+            const totalCarne = (numHomens * carnePorHomem + numMulheres * carnePorMulher + numCriancas * carnePorCrianca).toFixed(2);
+            const totalLinguica = (numHomens * linguicaPorHomem + numMulheres * linguicaPorMulher + numCriancas * linguicaPorCrianca).toFixed(2);
+            const totalFrango = (numHomens * frangoPorHomem + numMulheres * frangoPorMulher + numCriancas * frangoPorCrianca).toFixed(2);
+            const totalRefri = (numHomens * refriPorHomem + numMulheres * refriPorMulher + numCriancas * refriPorCrianca).toFixed(2);
+            const totalCerveja = (numHomens * cervejaPorHomem + numMulheres * cervejaPorMulher).toFixed(2);
+
+            const resultados = `
+                <h2>Quantidade de Itens</h2>
+                <p>Carne: ${totalCarne} kg</p>
+                <p>Linguiça: ${totalLinguica} kg</p>
+                <p>Frango: ${totalFrango} kg</p>
+                <p>Refrigerante: ${totalRefri} litros</p>
+                <p>Cerveja: ${totalCerveja} litros</p>
+            `;
+
+            document.getElementById('resultados').innerHTML = resultados;
+        }
+    </script>
+</body>
+</html>
